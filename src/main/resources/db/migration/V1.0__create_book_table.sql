@@ -1,0 +1,5 @@
+CREATE TABLE book
+(
+    id    INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL
+);

@@ -10,4 +10,6 @@ public class BookEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String title;
+
 }
