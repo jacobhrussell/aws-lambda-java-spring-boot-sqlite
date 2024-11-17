@@ -1,1 +1,8 @@
+# IntelliJ
 .idea
+
+# SQLite
+/data/*.sqlite
+
+# Build
+/target
