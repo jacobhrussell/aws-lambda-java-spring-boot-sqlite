@@ -1,2 +1,3 @@
-# aws-lambda-java-spring-boot-sqlite
-AWS Lambda Function Java Spring Boot with SQLite
+# AWS Lambda Function + Spring Boot + SQLite
+
+This repository is a reference implementation for a Spring Boot AWS Lambda Function using SQLite. 
