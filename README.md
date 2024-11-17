@@ -2,4 +2,8 @@
 
 ## Description
 
-This repository is a reference implementation for a Spring Boot AWS Lambda Function using SQLite. 
+This repository is a reference implementation for a Spring Boot AWS Lambda Function using SQLite.
+
+## References
+
+- https://github.com/aws-samples/serverless-graalvm-demo
