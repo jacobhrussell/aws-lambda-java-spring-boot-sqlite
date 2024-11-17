@@ -6,4 +6,5 @@ This repository is a reference implementation for a Spring Boot AWS Lambda Funct
 
 ## References
 
+- https://github.com/aws-samples/serverless-java-frameworks-samples
 - https://github.com/aws-samples/serverless-graalvm-demo
