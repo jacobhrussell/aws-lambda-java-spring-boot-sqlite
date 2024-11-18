@@ -11,8 +11,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>aws-lambda-java-spring-boot-sqlite</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>aws-lambda-java-spring-boot-sqlite</name>
+	<description>Spring Boot SQLite project</description>
 	<url/>
 	<properties>
 		<java.version>17</java.version>
