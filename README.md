@@ -44,3 +44,5 @@ curl -X DELETE http://localhost:8080/book/1 | jq
 
 - https://github.com/aws-samples/serverless-java-frameworks-samples
 - https://github.com/aws-samples/serverless-graalvm-demo
+
+## FAQ

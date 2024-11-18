@@ -29,8 +29,8 @@ Resources:
       Handler: bootstrap
       Runtime: provided.al2
       Code:
-        S3Bucket: !Sub "spring-boot-graalvm-bucket"
-        S3Key: !Sub "spring-boot-graalvm.zip"
+        S3Bucket: !Sub "my-app-bucket"
+        S3Key: !Sub "my-spring-boot-app.zip"
       Role: !GetAtt LambdaExecutionRole.Arn
       MemorySize: 512
       Timeout: 30
