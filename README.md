@@ -6,6 +6,7 @@ This repository is a reference implementation for a Spring Boot AWS Lambda Funct
 
 ## Endpoints
 
+Create
 ```shell
 curl -X POST http://localhost:8080/book \
      -H "Content-Type: application/json" \
