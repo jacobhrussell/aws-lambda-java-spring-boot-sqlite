@@ -6,7 +6,7 @@ This repository is a reference implementation for a Spring Boot AWS Lambda Funct
 
 ## Endpoints
 
-Create
+Create:
 ```shell
 curl -X POST http://localhost:8080/book \
      -H "Content-Type: application/json" \
@@ -14,12 +14,18 @@ curl -X POST http://localhost:8080/book \
            "title": "The Great Gatsby"
          }' | jq
 ```
+
+List all:
 ```shell
 curl http://localhost:8080/book | jq
 ```
+
+Find by id:
 ```shell
 curl http://localhost:8080/book/1 | jq
 ```
+
+Update:
 ```shell
 curl -X PUT http://localhost:8080/book/1 \
      -H "Content-Type: application/json" \
@@ -28,6 +34,8 @@ curl -X PUT http://localhost:8080/book/1 \
          }' | jq
 
 ```
+
+Delete:
 ```shell
 curl -X DELETE http://localhost:8080/book/1 | jq
 ```
