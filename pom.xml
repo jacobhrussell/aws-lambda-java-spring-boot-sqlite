@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.5</version>
+        <version>3.4.0</version>
         <relativePath/>
     </parent>
     <groupId>com.example</groupId>
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.42.0.0</version>
+            <version>3.47.0.0</version>
         </dependency>
 
         <!-- Hibernate Community Dialects -->
@@ -59,83 +59,38 @@
             <artifactId>flyway-core</artifactId>
         </dependency>
 
-        <!-- GraalVM JUnit Platform Support -->
+        <!-- TODO: when working, try and remove this -->
         <dependency>
-            <groupId>org.graalvm.buildtools</groupId>
-            <artifactId>junit-platform-native</artifactId>
-            <version>0.9.19</version>
-            <scope>test</scope>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.4.12</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>build-image</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <image>
-                        <builder>paketobuildpacks/builder:tiny</builder>
-                    </image>
-                </configuration>
             </plugin>
-
-            <!-- GraalVM Native Maven Plugin -->
             <plugin>
                 <groupId>org.graalvm.buildtools</groupId>
                 <artifactId>native-maven-plugin</artifactId>
-                <version>0.9.19</version>
-                <extensions>true</extensions>
-                <executions>
-                    <execution>
-                        <id>build-native</id>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                        <phase>package</phase>
-                    </execution>
-                </executions>
                 <configuration>
-                    <mainClass>com.example.aws_lambda_java_spring_boot_sqlite.Application</mainClass>
-                    <classpath>
-                        <path>target/aws-lambda-java-spring-boot-sqlite-0.0.1-SNAPSHOT.jar.original</path>
-                    </classpath>
                     <buildArgs>
-                        --enable-url-protocols=http
-                        -H:+AddAllCharsets
-                        -H:+ReportExceptionStackTraces
+                        <buildArg>--initialize-at-run-time=java.sql.DriverManager</buildArg>
+                        <buildArg>--initialize-at-run-time=org.sqlite.JDBC</buildArg>
+                        <buildArg>--initialize-at-run-time=org.hibernate.community.dialect.SQLiteDialect</buildArg>
+                        <buildArg>-H:+ReportExceptionStackTraces</buildArg>
+                        <buildArg>--trace-class-initialization=org.sqlite.JDBC</buildArg>
+                        <buildArg>--enable-all-security-services</buildArg>
+                        <buildArg>-H:+RemoveSaturatedTypeFlows</buildArg>
                     </buildArgs>
-                </configuration>
-            </plugin>
-
-            <!-- Maven Assembly Plugin -->
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>native-zip</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <inherited>false</inherited>
-                    </execution>
-                </executions>
-                <configuration>
-                    <finalName>function</finalName>
-                    <descriptors>
-                        <descriptor>src/assembly/native.xml</descriptor>
-                    </descriptors>
+                    <skipNativeTests>true</skipNativeTests>
+                    <fallback>false</fallback>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
 </project>

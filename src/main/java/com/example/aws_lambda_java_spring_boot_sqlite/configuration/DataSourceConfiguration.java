@@ -20,7 +20,7 @@ public class DataSourceConfiguration {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(Objects.requireNonNull(environment.getProperty("driverClassName")));
         dataSource.setUrl(environment.getProperty("url"));
-        dataSource.setUsername(environment.getProperty("user"));
+        dataSource.setUsername(environment.getProperty("username"));
         dataSource.setPassword(environment.getProperty("password"));
         return dataSource;
     }

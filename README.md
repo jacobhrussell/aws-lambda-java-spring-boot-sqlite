@@ -4,6 +4,26 @@
 
 This repository is a reference implementation for a Spring Boot AWS Lambda Function using SQLite.
 
+## Running
+
+Create a local SQLite database:
+
+```shell
+data/db.sqlite
+```
+
+Create the executable:
+
+```shell
+./mvnw native:compile -Pnative
+```
+
+Run the executable:
+
+```shell
+target/aws-lambda-java-spring-boot-sqlite
+```
+
 ## Endpoints
 
 Create:
