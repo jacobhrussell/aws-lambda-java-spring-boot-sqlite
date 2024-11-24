@@ -4,6 +4,10 @@
 
 This repository is a reference implementation for a Spring Boot AWS Lambda Function using SQLite.
 
+## Setup
+
+Create a new SQLite database: `./data/db.sqlite`
+
 ## Endpoints
 
 Create:
