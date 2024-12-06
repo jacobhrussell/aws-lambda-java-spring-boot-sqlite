@@ -22,7 +22,7 @@
             <useDefaultExcludes>true</useDefaultExcludes>
             <fileMode>0775</fileMode>
             <includes>
-                <include>>aws-lambda-java-spring-boot-sqlite</include>
+                <include>aws-lambda-java-spring-boot-sqlite</include>
             </includes>
         </fileSet>
     </fileSets>

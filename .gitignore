@@ -3,9 +3,13 @@
 
 # SQLite
 /data/*.sqlite
+/mount/*.sqlite
 
 # Build
 /target
+
+# AWS
+samconfig.toml
 
 # Other
 .DS_Store
