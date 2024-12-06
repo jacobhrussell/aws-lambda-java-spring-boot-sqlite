@@ -32,6 +32,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Postgres -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.4</version>
+        </dependency>
+
         <!-- SQLite Driver -->
         <dependency>
             <groupId>org.xerial</groupId>
