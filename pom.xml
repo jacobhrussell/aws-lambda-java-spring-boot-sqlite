@@ -47,12 +47,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Flyway -->
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-database-postgresql</artifactId>
-        </dependency>
-
         <!-- AWS SDK -->
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
