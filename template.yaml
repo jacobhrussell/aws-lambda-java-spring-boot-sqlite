@@ -11,11 +11,11 @@ Parameters:
 Resources:
   ServerlessWebNativeFunction:
     Type: AWS::Serverless::Function
-    DependsOn:
-      - MountTargetResource1
-      - MountTargetResource2
-      - MountTargetResource3
-      - AccessPointResource
+#    DependsOn:
+#      - MountTargetResource1
+#      - MountTargetResource2
+#      - MountTargetResource3
+#      - AccessPointResource
     Properties:
       MemorySize: 512
       FunctionName: pet-store-native
@@ -23,69 +23,69 @@ Resources:
       CodeUri: ./target/aws-lambda-java-spring-boot-sqlite-0.0.1-SNAPSHOT-native-zip.zip
       Handler: NOP
       Runtime: provided.al2023
-      FileSystemConfigs:
-        - Arn: !GetAtt AccessPointResource.Arn
-          LocalMountPath: /mnt/efs
-      VpcConfig:
-        SubnetIds: !Ref SubnetIds
-        SecurityGroupIds:
-          - !Ref SecurityGroupId
+#      FileSystemConfigs:
+#        - Arn: !GetAtt AccessPointResource.Arn
+#          LocalMountPath: /mnt/efs
+#      VpcConfig:
+#        SubnetIds: !Ref SubnetIds
+#        SecurityGroupIds:
+#          - !Ref SecurityGroupId
       Events:
         HttpApiEvent:
           Type: HttpApi
           Properties:
             TimeoutInMillis: 20000
             PayloadFormatVersion: '1.0'
-  FileSystemResource:
-    Type: AWS::EFS::FileSystem
-    Properties:
-      PerformanceMode: maxIO
-      Encrypted: true
-      FileSystemTags:
-        - Key: Name
-          Value: TestFileSystem
-      FileSystemPolicy:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: "Allow"
-            Action:
-              - "elasticfilesystem:ClientMount"
-            Principal:
-              AWS: "*"
-  MountTargetResource1:
-    Type: AWS::EFS::MountTarget
-    Properties:
-      FileSystemId: !Ref FileSystemResource
-      SubnetId: !Select [ 0, !Ref SubnetIds ]
-      SecurityGroups:
-        - !Ref SecurityGroupId
-  MountTargetResource2:
-    Type: AWS::EFS::MountTarget
-    Properties:
-      FileSystemId: !Ref FileSystemResource
-      SubnetId: !Select [ 1, !Ref SubnetIds ]
-      SecurityGroups:
-        - !Ref SecurityGroupId
-  MountTargetResource3:
-    Type: AWS::EFS::MountTarget
-    Properties:
-      FileSystemId: !Ref FileSystemResource
-      SubnetId: !Select [ 2, !Ref SubnetIds ]
-      SecurityGroups:
-        - !Ref SecurityGroupId
-  AccessPointResource:
-    Type: 'AWS::EFS::AccessPoint'
-    Properties:
-      FileSystemId: !Ref FileSystemResource
-      PosixUser:
-        Uid: "1000"
-        Gid: "1000"
-      RootDirectory:
-        CreationInfo:
-          OwnerGid: "1000"
-          OwnerUid: "1000"
-          Permissions: "0777"
-        Path: "/myefs"
+#  FileSystemResource:
+#    Type: AWS::EFS::FileSystem
+#    Properties:
+#      PerformanceMode: maxIO
+#      Encrypted: true
+#      FileSystemTags:
+#        - Key: Name
+#          Value: TestFileSystem
+#      FileSystemPolicy:
+#        Version: "2012-10-17"
+#        Statement:
+#          - Effect: "Allow"
+#            Action:
+#              - "elasticfilesystem:ClientMount"
+#            Principal:
+#              AWS: "*"
+#  MountTargetResource1:
+#    Type: AWS::EFS::MountTarget
+#    Properties:
+#      FileSystemId: !Ref FileSystemResource
+#      SubnetId: !Select [ 0, !Ref SubnetIds ]
+#      SecurityGroups:
+#        - !Ref SecurityGroupId
+#  MountTargetResource2:
+#    Type: AWS::EFS::MountTarget
+#    Properties:
+#      FileSystemId: !Ref FileSystemResource
+#      SubnetId: !Select [ 1, !Ref SubnetIds ]
+#      SecurityGroups:
+#        - !Ref SecurityGroupId
+#  MountTargetResource3:
+#    Type: AWS::EFS::MountTarget
+#    Properties:
+#      FileSystemId: !Ref FileSystemResource
+#      SubnetId: !Select [ 2, !Ref SubnetIds ]
+#      SecurityGroups:
+#        - !Ref SecurityGroupId
+#  AccessPointResource:
+#    Type: 'AWS::EFS::AccessPoint'
+#    Properties:
+#      FileSystemId: !Ref FileSystemResource
+#      PosixUser:
+#        Uid: "1000"
+#        Gid: "1000"
+#      RootDirectory:
+#        CreationInfo:
+#          OwnerGid: "1000"
+#          OwnerUid: "1000"
+#          Permissions: "0777"
+#        Path: "/myefs"
 Globals:
   Api:
     EndpointConfiguration: REGIONAL
