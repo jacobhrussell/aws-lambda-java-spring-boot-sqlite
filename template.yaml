@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Serverless Java Container with GraalVM and EFS
 Parameters:
-  DbUrl:
+  ClusterEndpoint:
     Type: String
   DbUsername:
     Type: String
@@ -25,7 +25,7 @@ Resources:
             PayloadFormatVersion: '1.0'
       Environment:
         Variables:
-          DB_URL: !Ref DbUrl
+          CLUSTER_ENDPOINT: !Ref ClusterEndpoint
           DB_USERNAME: !Ref DbUsername
   ServerlessFunctionRole:
     Type: AWS::IAM::Role

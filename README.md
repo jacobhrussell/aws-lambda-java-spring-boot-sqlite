@@ -37,7 +37,7 @@ aws configure --profile your-profile
 Deploy via SAM CLI:
 
 ```shell
-sam deploy --guided --profile your-profile --parameter-overrides VpcId=vpc-abc123 SubnetIds="subnet-abc123,subnet-def456,subnet-ghi789" SecurityGroupId=sg-abc123
+sam deploy --guided --profile your-profile --parameter-overrides ClusterEndpoint=cluster-endpoint DbUsername=username
 ```
 
 Subsequent deploys can be done with just: `sam deploy`.
