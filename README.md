@@ -92,9 +92,3 @@ curl -X DELETE http://localhost:8080/book/1 | jq
 - https://github.com/aws-samples/serverless-java-frameworks-samples
 - https://github.com/aws-samples/serverless-graalvm-demo
 - https://github.com/aws-samples/aws-lambda-efs-samples/blob/master/README.md
-
-## FAQ
-
-### 1) What
-
-Skill issue.
