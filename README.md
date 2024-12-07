@@ -6,18 +6,6 @@ This repository is a reference implementation for a Spring Boot AWS Lambda Funct
 
 ## Running
 
-### SQLite
-
-Create a local SQLite database:
-
-```shell
-data/db.sqlite
-```
-
-Run/debug locally with IntelliJ or your IDE of choice.
-
-### Postgres
-
 Create a local Postgres database:
 
 ```shell
