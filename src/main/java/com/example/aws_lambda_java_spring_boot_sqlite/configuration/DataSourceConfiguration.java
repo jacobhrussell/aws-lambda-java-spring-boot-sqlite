@@ -1,29 +1,52 @@
 package com.example.aws_lambda_java_spring_boot_sqlite.configuration;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
+import software.amazon.awssdk.regions.Region;
+import software.amazon.awssdk.services.dsql.DsqlUtilities;
 
 import javax.sql.DataSource;
-import java.util.Objects;
 
 @Configuration
 public class DataSourceConfiguration {
 
-    // Not needed for Postgres
-//    @Autowired
-//    Environment environment;
-//
-//    @Bean
-//    public DataSource dataSource() {
-//        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setDriverClassName(Objects.requireNonNull(environment.getProperty("driverClassName")));
-//        dataSource.setUrl(environment.getProperty("url"));
-//        dataSource.setUsername(environment.getProperty("username"));
-//        dataSource.setPassword(environment.getProperty("password"));
-//        return dataSource;
-//    }
+    @Value("${spring.datasource.url")
+    private String dbUrl;
 
+    @Value("${spring.datasource.driver-class-name}")
+    private String driverClassName;
+
+    @Value("${spring.datasource.username}")
+    private String dbUsername;
+
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource dataSource() {
+        String password = generateToken(dbUrl);
+
+        if (password == null || password.isEmpty()) {
+            throw new IllegalStateException("Failed to generate database token");
+        }
+
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(driverClassName);
+        dataSource.setUrl(dbUrl);
+        dataSource.setUsername(dbUsername);
+
+        return dataSource;
+    }
+
+    private String generateToken(String clusterEndpoint) {
+        DsqlUtilities utilities = DsqlUtilities.builder()
+                .region(Region.US_EAST_1)
+                .credentialsProvider(DefaultCredentialsProvider.create())
+                .build();
+
+        return utilities.generateDbConnectAdminAuthToken(builder -> builder.hostname(clusterEndpoint)
+                .region(Region.US_EAST_1));
+    }
 }
