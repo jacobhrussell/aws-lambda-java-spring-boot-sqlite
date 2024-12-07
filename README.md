@@ -1,8 +1,8 @@
-# AWS Lambda Function + Spring Boot + SQLite
+# AWS Lambda Function + Spring Boot + DSQL 
 
 ## Description
 
-This repository is a reference implementation for a Spring Boot AWS Lambda Function using SQLite.
+This repository is a reference implementation for a Spring Boot AWS Lambda Function using Aurora DSQL.
 
 ## Running
 
