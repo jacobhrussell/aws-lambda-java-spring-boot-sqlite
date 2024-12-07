@@ -6,13 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Book {
 
-    private Long id;
+    private UUID id;
     private String title;
 
     public static Book of(BookEntity bookEntity) {

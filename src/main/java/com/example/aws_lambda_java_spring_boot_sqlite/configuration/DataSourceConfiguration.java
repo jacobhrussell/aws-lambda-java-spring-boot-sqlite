@@ -14,7 +14,10 @@ import javax.sql.DataSource;
 @Configuration
 public class DataSourceConfiguration {
 
-    @Value("${spring.datasource.url")
+    @Value("${spring.datasource.cluster-endpoint}")
+    private String clusterEndpoint;
+
+    @Value("${spring.datasource.url}")
     private String dbUrl;
 
     @Value("${spring.datasource.driver-class-name}")
@@ -26,7 +29,7 @@ public class DataSourceConfiguration {
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
-        String password = generateToken(dbUrl);
+        String password = generateToken(clusterEndpoint);
 
         if (password == null || password.isEmpty()) {
             throw new IllegalStateException("Failed to generate database token");
@@ -36,6 +39,7 @@ public class DataSourceConfiguration {
         dataSource.setDriverClassName(driverClassName);
         dataSource.setUrl(dbUrl);
         dataSource.setUsername(dbUsername);
+        dataSource.setPassword(password);
 
         return dataSource;
     }

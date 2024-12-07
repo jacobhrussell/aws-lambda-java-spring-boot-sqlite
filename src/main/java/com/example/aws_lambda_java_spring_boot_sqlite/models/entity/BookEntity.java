@@ -6,14 +6,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @Entity
 @Table(name = "book")
 public class BookEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue()
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID id;
 
     private String title;
 
