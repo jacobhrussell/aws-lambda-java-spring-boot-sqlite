@@ -1,4 +1,4 @@
-# AWS Lambda Function + Spring Boot + DSQL 
+# AWS Lambda Function + Spring Boot + DSQL
 
 ## Description
 
@@ -53,6 +53,7 @@ sam delete
 ## Endpoints
 
 Create:
+
 ```shell
 curl -X POST http://localhost:8080/book \
      -H "Content-Type: application/json" \
@@ -62,16 +63,19 @@ curl -X POST http://localhost:8080/book \
 ```
 
 List all:
+
 ```shell
 curl http://localhost:8080/book | jq
 ```
 
 Find by id:
+
 ```shell
 curl http://localhost:8080/book/1 | jq
 ```
 
 Update:
+
 ```shell
 curl -X PUT http://localhost:8080/book/1 \
      -H "Content-Type: application/json" \
@@ -82,9 +86,19 @@ curl -X PUT http://localhost:8080/book/1 \
 ```
 
 Delete:
+
 ```shell
 curl -X DELETE http://localhost:8080/book/1 | jq
 ```
+
+## Connecting to the DB
+
+Use your preferred RDBMS tool to connect via the cluster endpoint. You can use the AWS Console to create a short-lived
+token to use as a password.
+
+Schema visualization does not work, so you will need to query system tables in order to see database information:
+- see all schemas: `select * from pg_namespace;`
+- see all tables: `select * from pg_tables where schemaname = 'public';`
 
 ## References
 
@@ -92,3 +106,11 @@ curl -X DELETE http://localhost:8080/book/1 | jq
 - https://github.com/aws-samples/serverless-java-frameworks-samples
 - https://github.com/aws-samples/serverless-graalvm-demo
 - https://github.com/aws-samples/aws-lambda-efs-samples/blob/master/README.md
+- https://docs.aws.amazon.com/aurora-dsql/latest/userguide/SECTION_program-with-java-apps.html
+- https://docs.aws.amazon.com/aurora-dsql/latest/userguide/accessing-sql-clients.html#accessing-sql-clients-datagrip
+- https://docs.aws.amazon.com/aurora-dsql/latest/userguide/working-with-systems-tables.html
+
+## FAQs
+
+Q: Why isn't the Aurora DSQL cluster defined in the `template.yaml`?
+A: Aurora DSQL [doesn't support CloudFormation during preview](https://docs.aws.amazon.com/aurora-dsql/latest/userguide/accessing-programmatic.html).
